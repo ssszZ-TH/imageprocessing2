@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 
-def power_law(part,gamma):
+def power_law(part,gamma): # ที่อยู่ไฟล์ gamma
     img_in = cv.imread(part,cv.IMREAD_GRAYSCALE)
 
     gamma_corrected = (img_in / 255) ** gamma
