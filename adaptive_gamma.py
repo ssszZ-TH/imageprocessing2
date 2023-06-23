@@ -40,9 +40,8 @@ for i in Y_points:
         #cv.imwrite('{}_{}.{}'.format(name, count, frmt), split)
         #count += 1
         histrogram = cv.calcHist([splited],[0],None,[256],[0,256])
-        plt.plot(histrogram)
-        plt.title('Histogram for gray scale image')
-        plt.show()
-        #histrogram_mean=histrogram.mean()
-        #print(histrogram_mean)
+        #plt.plot(histrogram)
+        #plt.title('Histogram for gray scale image')
+        #plt.show()
+        
 #print(all_grayscale)
