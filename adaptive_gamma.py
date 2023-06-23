@@ -1,8 +1,8 @@
 import cv2 as cv
 import numpy as np
-import power_law
+from matplotlib import pyplot as plt
 
-path_to_img = "./18558.jpg"
+path_to_img = "./dif_shade.jpeg"
 img = cv.imread(path_to_img,cv.IMREAD_GRAYSCALE)
 img_h, img_w = img.shape
 split_width = 500
@@ -37,9 +37,9 @@ frmt = 'png'
 for i in Y_points:
     for j in X_points:
         split = img[i:i+split_height, j:j+split_width]
-        # cv.imwrite('{}_{}.{}'.format(name, count, frmt), split)
-        # count += 1
+        #cv.imwrite('{}_{}.{}'.format(name, count, frmt), split)
+        #count += 1
         histrogram = cv.calcHist([split],[0],None,[256],[0,256])
         histrogram_mean=histrogram.mean()
-        print(histrogram_mean)
+        #print(histrogram_mean)
 #print(all_grayscale)
