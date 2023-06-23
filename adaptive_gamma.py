@@ -9,8 +9,11 @@ img_h, img_w = img.shape
 split_width = 500
 split_height = 500
 dark_zone = 128
+gamma_ligh_up = 0.5
+gamma_ligh_down = 1.5
 
-
+def tune_light(img, ligh_up=True):
+    pass
 def start_points(size, split_size, overlap):
     points = [0]
     stride = int(split_size * (1-overlap))
@@ -27,7 +30,6 @@ def start_points(size, split_size, overlap):
         counter += 1
     return points
 
-
 X_points = start_points(img_w, split_width, 0.5)
 Y_points = start_points(img_h, split_height, 0.5)
 
@@ -41,9 +43,9 @@ for i in Y_points:
         splited = img[i:i+split_height, j:j+split_width]
         histrogram = cv.calcHist([splited],[0],None,[256],[50,200])
         if histrogram.mean() <= dark_zone :
-            print("up_light", end="\t")
+            print("up_ligh", end="\t\t")
         else :
-            print("down_light", end="\t")
+            print("dn_ligh", end="\t\t")
         #cv.imwrite('{}_{}.{}'.format(name, count, frmt), split) ##debug ว่าภาพเเบ่งจริงอะป่าว
         #count += 1
         # plt.plot(histrogram)#debug ว่าทำไมค่า mean sum ออกมาเท่ากันทุกตัวเลย
