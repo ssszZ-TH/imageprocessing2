@@ -36,10 +36,13 @@ frmt = 'png'
 
 for i in Y_points:
     for j in X_points:
-        split = img[i:i+split_height, j:j+split_width]
+        splited = img[i:i+split_height, j:j+split_width]
         #cv.imwrite('{}_{}.{}'.format(name, count, frmt), split)
         #count += 1
-        histrogram = cv.calcHist([split],[0],None,[256],[0,256])
-        histrogram_mean=histrogram.mean()
+        histrogram = cv.calcHist([splited],[0],None,[256],[0,256])
+        plt.plot(histrogram)
+        plt.title('Histogram for gray scale image')
+        plt.show()
+        #histrogram_mean=histrogram.mean()
         #print(histrogram_mean)
 #print(all_grayscale)
