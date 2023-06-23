@@ -12,8 +12,14 @@ dark_zone = 128
 gamma_light_up = 0.5
 gamma_light_down = 1.5
 
-def tune_light(img, light_up=True):
-    pass
+def tune_light(img_in, light_up=True):
+    if light_up==True:
+        gamma_corrected = (img_in / 255) ** gamma_light_up
+    else :
+        gamma_corrected = (img_in / 255) ** gamma_light_down
+        
+    gamma_corrected = gamma_corrected*255
+
 def start_points(size, split_size, overlap):
     points = [0]
     stride = int(split_size * (1-overlap))
