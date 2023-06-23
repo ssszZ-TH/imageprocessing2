@@ -5,6 +5,7 @@ import power_law
 
 histrogram_mean_val = 128
 window_size = 100
+each_window_overlap = 3
 gamma_val1 = 0.5 # มากกว่า 1 คือ ลดเเสง
 gamma_val2 = 1.5 # น้อยกว่า 1 คือ เร่งเเสง
 
@@ -29,3 +30,6 @@ def split(img, window_size, margin): # เเบ่งภาพเป็นช�
     return splitted
 
 img_in = cv.imread("./18558.png",cv.IMREAD_GRAYSCALE)
+
+img = np.arange(16).reshape(4,4)
+out = split(img, window_size=2, margin=1)
