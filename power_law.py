@@ -3,7 +3,6 @@ import numpy as np
 
 def power_law(img_in,gamma): # ที่อยู่ไฟล์ gamma
     
-
     gamma_corrected = (img_in / 255) ** gamma
 
     gamma_corrected = gamma_corrected*255

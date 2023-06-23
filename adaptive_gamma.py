@@ -41,4 +41,5 @@ for i in Y_points:
         # count += 1
         histrogram = cv.calcHist([split],[0],None,[256],[0,256])
         histrogram_mean=histrogram.mean()
+        print(histrogram_mean)
 #print(all_grayscale)
