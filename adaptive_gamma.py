@@ -2,33 +2,38 @@ import cv2 as cv
 import numpy as np
 import power_law
 
+path_to_img = ""
+img = cv.imread(path_to_img)
+img_h, img_w, _ = img.shape
+split_width = 150
+split_height = 150
 
-histrogram_mean_val = 128
-window_size = 100
-each_window_overlap = 3
-gamma_val1 = 0.5 # มากกว่า 1 คือ ลดเเสง
-gamma_val2 = 1.5 # น้อยกว่า 1 คือ เร่งเเสง
+def start_points(size, split_size, overlap=0):
+    points = [0]
+    stride = int(split_size * (1-overlap))
+    counter = 1
+    while True:
+        pt = stride * counter
+        if pt + split_size >= size:
+            if split_size == size:
+                break
+            points.append(size - split_size)
+            break
+        else:
+            points.append(pt)
+        counter += 1
+    return points
 
-def split(img, window_size, margin): # เเบ่งภาพเป็นชิ้นๆ โดยภาพเกยกันตามระบะ margin
 
-    sh = list(img.shape)
-    sh[0], sh[1] = sh[0] + margin * 2, sh[1] + margin * 2
-    img_ = np.zeros(shape=sh)
-    img_[margin:-margin, margin:-margin] = img
+X_points = start_points(img_w, split_width, 0.5)
+Y_points = start_points(img_h, split_height, 0.5)
 
-    stride = window_size
-    step = window_size + 2 * margin
+count = 0
+name = 'splitted'
+frmt = 'jpeg'
 
-    nrows, ncols = img.shape[0] // window_size, img.shape[1] // window_size
-    splitted = []
-    for i in range(nrows):
-        for j in range(ncols):
-            h_start = j*stride
-            v_start = i*stride
-            cropped = img_[v_start:v_start+step, h_start:h_start+step]
-            splitted.append(cropped)
-    return splitted
-
-img_in = cv.imread("./18558.png",cv.IMREAD_GRAYSCALE)
-img_np = np.array(img_in , dtype="uint8")
-#splited_img = split(img_np, window_size=window_size, margin=each_window_overlap)
+for i in Y_points:
+    for j in X_points:
+        split = img[i:i+split_height, j:j+split_width]
+        cv.imwrite('{}_{}.{}'.format(name, count, frmt), split)
+        count += 1
