@@ -30,6 +30,5 @@ def split(img, window_size, margin): # เเบ่งภาพเป็นช�
     return splitted
 
 img_in = cv.imread("./18558.png",cv.IMREAD_GRAYSCALE)
-
-img = np.arange(16).reshape(4,4)
-out = split(img, window_size=2, margin=1)
+img_np = np.array(img_in , dtype="uint8")
+#splited_img = split(img_np, window_size=window_size, margin=each_window_overlap)
