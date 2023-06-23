@@ -60,3 +60,6 @@ for i in Y_points:
     print("\n")
         
 #print(all_grayscale)
+
+### ต้องทำต่อ
+## ปรับ gamma ด้วย   def tune_light(img_in, light_up=True):   ในเเต่ละรุปย่อย เเล้ว imwrite ออกมาให้หมด
