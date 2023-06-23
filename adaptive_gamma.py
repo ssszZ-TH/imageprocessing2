@@ -29,13 +29,16 @@ def start_points(size, split_size, overlap):
 X_points = start_points(img_w, split_width, 0.5)
 Y_points = start_points(img_h, split_height, 0.5)
 
-#count = 0 #เอาไว้ยัดในชื่อรูป เพราะชื่อรูปซ้ำกันไม่ได้
-#name = 'splitted'
-#frmt = 'png'
+count = 0 #เอาไว้ยัดในชื่อรูป เพราะชื่อรูปซ้ำกันไม่ได้
+name = 'splitted'
+frmt = 'png'
+
 
 for i in Y_points:
     for j in X_points:
         split = img[i:i+split_height, j:j+split_width]
-#         cv.imwrite('{}_{}.{}'.format(name, count, frmt), split)
-#         count += 1
-print(split.shape)
+        # cv.imwrite('{}_{}.{}'.format(name, count, frmt), split)
+        # count += 1
+        histrogram = cv.calcHist([split],[0],None,[256],[0,256])
+        histrogram_mean=histrogram.mean()
+#print(all_grayscale)
