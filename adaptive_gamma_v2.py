@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
 from power_law import power_law
-
+from image_pad import padding
 
 
 if __name__=="__main__":
@@ -29,7 +29,7 @@ if __name__=="__main__":
             img_ = img[r:r+split_size, c:c+split_size]
             
             ##เเต่งรูปเล็กๆ เเต่ละรูป
-            histrogram = cv.calcHist([img_],[0],None,[256],[128,256])
+            histrogram = cv.calcHist([padding(img_,overlap)],[0],None,[256],[128,256]) #padding นัดไปตรงๆ
             histrogram_mean = histrogram.mean()
             print(histrogram_mean)
             

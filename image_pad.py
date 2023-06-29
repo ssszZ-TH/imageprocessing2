@@ -3,7 +3,7 @@ import numpy as np
 
 def padding(img,r):
     reflect_img = cv.copyMakeBorder(img,r,r,r,r,cv.BORDER_REFLECT)
-    return reflect_img
+    return  np.array(reflect_img, dtype="uint8")
 
 if __name__ == "__main__":
     img = cv.imread('dif_shade.jpeg')
