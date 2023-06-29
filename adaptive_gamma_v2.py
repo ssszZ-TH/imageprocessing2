@@ -1,6 +1,7 @@
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
+from power_law import power_law
 
 
 
@@ -21,7 +22,22 @@ if __name__=="__main__":
  
     for r in range(0, img.shape[0] ,split_size):
         for c in range(0, img.shape[1] ,split_size):
-            cv.imshow("slice",img[r:r+split_size, c:c+split_size])
-            cv.waitKey(0)
-            cv.destroyAllWindows()
+            # cv.imshow("slice",img[r:r+split_size, c:c+split_size])
+            # cv.waitKey(0)
+            # cv.destroyAllWindows()
+            img_ = img[r:r+split_size, c:c+split_size]
             
+            ##เเต่งรูปเล็กๆ เเต่ละรูป
+            histrogram = cv.calcHist([img_],[0],None,[256],[128,256])
+            histrogram_mean = histrogram.mean()
+            if histrogram_mean<=dark_zone:
+                img_=power_law(img_,gamma_light_up)
+            else :
+                img_=power_law(img_,gamma_light_down)
+            
+            img_out[r:r+split_size, c:c+split_size] = img_
+            
+    cv.imwrite("./output.png",img_out)
+    cv.imshow("spa_adaptive_light",img_out)
+    cv.waitKey(0)
+    cv.destroyAllWindows()
